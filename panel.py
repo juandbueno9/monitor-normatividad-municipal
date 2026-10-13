@@ -1,7 +1,7 @@
 """
 panel.py
 --------
-Panel visual de monitor-normatividad, con los colores de la empresa.
+Panel visual de monitor-normatividad.
 
 A diferencia de la primera versión, ahora este módulo levanta un pequeño
 SERVIDOR LOCAL (con la librería estándar de Python, sin dependencias
@@ -87,11 +87,10 @@ MS_TENANT_ID = os.getenv("MS_TENANT_ID", "")
 MS_CLIENT_ID = os.getenv("MS_CLIENT_ID", "")
 MS_CLIENT_SECRET = os.getenv("MS_CLIENT_SECRET", "")
 
-# --- Colores de marca de la empresa (https://www.empresa.com/) -----------------
-# Ver panel.py de la versión anterior / README para de dónde salen.
-COLOR_TEAL_OSCURO = "#0c434f"
-COLOR_TEAL = "#007b95"
-COLOR_MAGENTA = "#af019e"
+# --- Colores del panel (cámbialos para usar los de tu organización) ---------
+COLOR_TEAL_OSCURO = "#0f2a44"
+COLOR_TEAL = "#1d4ed8"
+COLOR_MAGENTA = "#0ea5e9"
 
 
 # ---------------------------------------------------------------------------
@@ -254,7 +253,7 @@ class PanelHandler(BaseHTTPRequestHandler):
             cuerpo_html = construir_html_normas(
                 [norma],
                 intro=(
-                    f"Envío manual desde el panel de la empresa de la siguiente norma:"
+                    f"Envío manual desde el panel de normatividad de la siguiente norma:"
                 ),
             )
             mailer.enviar_correo(
@@ -293,7 +292,7 @@ PAGINA_HTML = """<!doctype html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Panel de Normatividad · la empresa</title>
+<title>Panel de Normatividad</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
   :root {
@@ -313,8 +312,8 @@ PAGINA_HTML = """<!doctype html>
   }
   header.app .marca { display: flex; flex-direction: column; gap: 2px; }
   header.app .empresa { font-size: 22px; font-weight: 800; letter-spacing: 0.5px; }
-  header.app .subtitulo { font-size: 13px; color: #d7eef2; }
-  header.app .estado { font-size: 12px; color: #d7eef2; text-align: right; }
+  header.app .subtitulo { font-size: 13px; color: #dbeafe; }
+  header.app .estado { font-size: 12px; color: #dbeafe; text-align: right; }
   header.app .estado button {
     background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); color: #fff;
     padding: 5px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; margin-left: 8px;
@@ -358,8 +357,8 @@ PAGINA_HTML = """<!doctype html>
   .btn { border: none; padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; }
   .btn-pdf { background: var(--magenta); color: #fff; }
   .btn-pdf:hover { opacity: 0.9; }
-  .btn-correo { background: #eef6f8; color: var(--teal-oscuro); border: 1px solid var(--borde); }
-  .btn-correo:hover { background: #e2eef1; }
+  .btn-correo { background: #eff6ff; color: var(--teal-oscuro); border: 1px solid var(--borde); }
+  .btn-correo:hover { background: #dbeafe; }
   .enlace-sitio { font-size: 12px; color: var(--teal); text-decoration: none; margin-left: auto; }
   .enlace-sitio:hover { text-decoration: underline; }
   .tam { font-size: 11px; color: #999; }
@@ -386,7 +385,7 @@ PAGINA_HTML = """<!doctype html>
 
 <header class="app">
   <div class="marca">
-    <span class="empresa">COOPERATIVA</span>
+    <span class="empresa">MONITOR NORMATIVO</span>
     <span class="subtitulo">Panel de Normatividad municipal · Santa Rosa de Cabal</span>
   </div>
   <div class="estado">
@@ -427,7 +426,7 @@ PAGINA_HTML = """<!doctype html>
   </section>
 </main>
 
-<footer class="app">monitor-normatividad · la empresa · se actualiza solo cada pocos minutos mientras esta página esté abierta</footer>
+<footer class="app">monitor-normatividad · se actualiza solo cada pocos minutos mientras esta página esté abierta</footer>
 
 <script>
 let NORMAS = [];
@@ -641,7 +640,7 @@ async function cargarHistorial() {
 }
 
 document.addEventListener('visibilitychange', () => {
-  if (!document.hidden) document.title = 'Panel de Normatividad · la empresa';
+  if (!document.hidden) document.title = 'Panel de Normatividad';
 });
 
 cargarNormas();
