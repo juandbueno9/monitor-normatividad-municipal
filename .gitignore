@@ -1,0 +1,23 @@
+# Entorno virtual
+.venv/
+venv/
+
+# Secretos y configuración local
+.env
+
+# Estado local / registro de deduplicación e historial
+seen_norms.json
+seen_norms.json.bak
+run_history.json
+run_history.json.bak
+
+# Logs
+logs/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# macOS
+.DS_Store
